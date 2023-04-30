@@ -28,7 +28,7 @@ class ProgressSection extends StatelessWidget {
         builder: (context, state) {
       if (state is CategoriesLoading) {
         return LoadingAnimationWidget.fourRotatingDots(
-            color: Colors.blue, size: 30);
+            color: Colors.green, size: 30);
       }
       if (state is CategoriesFailed) {
         return const Center(
@@ -214,7 +214,7 @@ class _ProgressCategoryState extends State<ProgressCategory> {
                                       ),
                                       const Icon(
                                         Icons.check_circle,
-                                        color: Colors.lightBlueAccent,
+                                        color: Colors.green,
                                         size: 12,
                                       ),
                                     ],
@@ -366,7 +366,7 @@ class _GroupMemberProgressSectionState
                   }
                   if (state is MemberLoading) {
                     return LoadingAnimationWidget.discreteCircle(
-                        color: Colors.blue, size: 30);
+                        color: Colors.green, size: 30);
                   }
                   if (state is MemberLoaded) {
                     User groupMember = state.user;
@@ -374,7 +374,7 @@ class _GroupMemberProgressSectionState
                       builder: (context, state) {
                         if (state is CategoriesLoading) {
                           return LoadingAnimationWidget.threeRotatingDots(
-                              color: Colors.blue, size: 30);
+                              color: Colors.green, size: 30);
                         }
                         if (state is CategoriesLoaded) {
                           List<Category> categoryList = state.categories;

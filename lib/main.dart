@@ -31,14 +31,18 @@ import 'package:inspired_senior_care_app/data/repositories/database/database_rep
 import 'package:inspired_senior_care_app/data/repositories/notifications/comment_notification_repository.dart';
 import 'package:inspired_senior_care_app/data/repositories/purchases/purchases_repository.dart';
 import 'package:inspired_senior_care_app/data/repositories/storage/storage_repository.dart';
-import 'package:inspired_senior_care_app/firebase_options.dart';
 import 'package:inspired_senior_care_app/globals.dart';
 import 'package:inspired_senior_care_app/router/router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(options: FirebaseOptions(
+    apiKey: 'AIzaSyAfvT6UPFcNAhO40cXHBH1AE65NG93MGhs', 
+    appId: '1:677591631531:android:5a9f78361977519b9ed9ee', 
+    messagingSenderId: '677591631531', 
+    projectId: 'elder-care-944d6'
+));
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var initScreen = prefs.getInt("initScreen");
 
@@ -165,7 +169,165 @@ class _MyAppState extends State<MyApp> {
             BlocProvider(
               create: (context) => OnboardingBloc(
                   databaseRepository: context.read<DatabaseRepository>(),
+<<<<<<< Updated upstream
                   storageRepository: context.read<StorageRepository>()),
+=======
+                  storageRepository: context.read<StorageRepository>())),
+          BlocProvider(
+            create: (context) => OnboardingBloc(
+                databaseRepository: context.read<DatabaseRepository>(),
+                storageRepository: context.read<StorageRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => SettingsCubit(
+                databaseRepository: context.read<DatabaseRepository>(),
+                authRepository: context.read<AuthRepository>(),
+                profileBloc: context.read<ProfileBloc>()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                SignupCubit(authRepository: context.read<AuthRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => ForgotPasswordCubit(
+                authRepository: context.read<AuthRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => ResponseBloc(
+                databaseRepository: context.read<DatabaseRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => ResponseCommentBloc(
+                databaseRepository: context.read<DatabaseRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => DeckCubit(
+                profileBloc: context.read<ProfileBloc>(),
+                databaseRepository: context.read<DatabaseRepository>()),
+          ),
+        ],
+        child: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            bloc = context.read<AuthBloc>();
+            return MaterialApp.router(
+              scaffoldMessengerKey: snackbarKey,
+              routeInformationParser: router.routeInformationParser,
+              routerDelegate: router.routerDelegate,
+              routeInformationProvider: router.routeInformationProvider,
+              title: 'Inspired Senior Care App',
+              theme: ThemeData(
+                primarySwatch: Colors.green,
+                  scaffoldBackgroundColor: Colors.grey.shade100,
+                  inputDecorationTheme: InputDecorationTheme(
+                    filled: true,
+                    fillColor: Colors.white,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                  ),
+                  progressIndicatorTheme: ProgressIndicatorThemeData(
+                      circularTrackColor: Colors.grey.shade400),
+                  elevatedButtonTheme: ElevatedButtonThemeData(
+                    style: ElevatedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      fixedSize: const Size(200, 30),
+                      minimumSize: const Size(25, 30),
+                    ),
+                  ),
+                  outlinedButtonTheme: OutlinedButtonThemeData(
+                    style: OutlinedButton.styleFrom(
+                      shape: const StadiumBorder(),
+                      fixedSize: const Size(200, 30),
+                      minimumSize: const Size(25, 30),
+                    ),
+                  ),
+                  bottomSheetTheme: const BottomSheetThemeData(
+                      backgroundColor: Colors.transparent),
+                  textTheme: GoogleFonts.karlaTextTheme(
+      Theme.of(context).textTheme,
+    ),
+                  //  useMaterial3: true,
+
+                  primaryColor: const Color(0xffC27A63)),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  late final router = GoRouter(
+    routes: _routes,
+    //  routerNeglect: true,
+    initialLocation: '/',
+    // urlPathStrategy: UrlPathStrategy.path,
+    debugLogDiagnostics: true,
+    // errorPageBuilder: ,
+    refreshListenable: GoRouterRefreshStream(bloc.stream),
+    redirect: (context, state) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      int? initScreen = prefs.getInt("initScreen");
+      bool isLoggingIn = state.location == '/login';
+      bool loggedIn = bloc.state.authStatus == AuthStatus.authenticated;
+      bool isOnboarding = state.location == '/login/signup';
+      // TODO: Create Onboarding Completed SharedPrefs Value ***
+      bool completedOnboarding = initScreen == 1;
+
+      if (!loggedIn) {
+        return isLoggingIn
+            ? completedOnboarding
+                ? null
+                : '/login/signup'
+            : isOnboarding
+                ? null
+                : '/login';
+      }
+
+      final isLoggedIn = state.location == '/';
+
+      if (loggedIn && isLoggingIn) return isLoggedIn ? null : '/';
+
+      return null;
+    },
+  );
+  final List<GoRoute> _routes = [
+    GoRoute(
+        name: 'login',
+        path: '/login',
+        builder: (context, state) => const LoginScreen(),
+        routes: [
+          GoRoute(
+            name: 'signup',
+            path: 'signup',
+            builder: (context, state) => const SignupScreen(),
+          ),
+        ]),
+    GoRoute(
+      name: 'settings',
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
+    ),
+    GoRoute(
+        name: 'home',
+        path: '/',
+        builder: (context, state) {
+          Globals().index = 1;
+          return const MyHomePage();
+        },
+        routes: const []),
+    GoRoute(
+        name: 'categories',
+        path: '/categories',
+        builder: (context, state) {
+          Globals().index = 0;
+          return const Categories();
+        },
+        routes: [
+          GoRoute(
+            name: 'deck-page',
+            path: 'deck-page',
+            builder: (context, state) => DeckPage(
+              category: state.extra as Category,
+>>>>>>> Stashed changes
             ),
             BlocProvider(
               create: (context) => SettingsCubit(

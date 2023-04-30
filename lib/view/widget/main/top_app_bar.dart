@@ -22,7 +22,8 @@ class MainTopAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      elevation: 0,
+      backgroundColor: Colors.green,
       foregroundColor: Colors.black87,
       centerTitle: true,
       toolbarHeight: 60,
@@ -36,7 +37,7 @@ class MainTopAppBar extends StatelessWidget {
           ? Text(title!)
           : Image.asset(
               'lib/assets/Logo-01.png',
-              height: 40,
+              height: 30,
               fit: BoxFit.contain,
             ),
     );
@@ -80,6 +81,7 @@ class InboxButton extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                         ),
+<<<<<<< Updated upstream
                         const SizedBox(
                           height: 8.0,
                         ),
@@ -170,6 +172,50 @@ class InboxButton extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
+=======
+                      ),
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      const InviteList()
+                    ]),
+                  ))
+                ];
+              },
+              child: IgnorePointer(
+                child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      FontAwesomeIcons.inbox,
+                      color: Colors.white,
+                    )),
+              ),
+            ),
+            invites.isNotEmpty
+                ? Animate(
+                    effects: const [
+                      ShakeEffect(
+                          duration: Duration(seconds: 1),
+                          hz: 2,
+                          offset: Offset(-0.1, 1.0),
+                          rotation: 1),
+                      // ScaleEffect(),
+                      // SlideEffect(
+                      //   begin: Offset(0.5, 0.5),
+                      //   end: Offset(0, 0),
+                      // )
+                    ],
+                    child: Positioned(
+                      top: 8,
+                      left: 4,
+                      child: CircleAvatar(
+                        radius: 10.0,
+                        backgroundColor: Colors.green,
+                        child: Text(
+                          '${invites.length}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12),
+>>>>>>> Stashed changes
                         ),
                         const SizedBox(
                           height: 8.0,

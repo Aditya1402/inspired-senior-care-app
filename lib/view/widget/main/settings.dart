@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget {
             User currentUser = context.watch<ProfileBloc>().state.user;
             List<AbstractSettingsTile> mainSettingsTiles = [
               SettingsTile.navigation(
-                title: const Text('Email'),
+                title:  Text('Email',style: Theme.of(context).textTheme.titleMedium,),
                 value: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 180),
                     child: FittedBox(
@@ -55,9 +55,9 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: const Padding(
+                title:  Padding(
                   padding: EdgeInsets.only(right: 8.0),
-                  child: Text('Name'),
+                  child: Text('Name',style: Theme.of(context).textTheme.titleMedium),
                 ),
                 value: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 180),
@@ -79,9 +79,9 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: const Padding(
+                title:  Padding(
                   padding: EdgeInsets.only(right: 8.0),
-                  child: Text('Title'),
+                  child: Text('Title',style: Theme.of(context).textTheme.titleMedium,),
                 ),
                 value: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 180),
@@ -100,7 +100,7 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: const Text('Password'),
+                title:  Text('Password',style: Theme.of(context).textTheme.titleMedium),
                 leading: const Icon(Icons.lock_rounded),
                 onPressed: (context) {
                   showDialog(
@@ -112,14 +112,14 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               SettingsTile.navigation(
-                title: const Text('Sign Out'),
+                title:  Text('Sign Out',style: Theme.of(context).textTheme.titleMedium),
                 leading: const Icon(Icons.logout_rounded),
                 onPressed: (context) {
                   context.read<AuthBloc>().add(AppLogoutRequested());
                 },
               ),
               SettingsTile.navigation(
-                title: const Text('Delete Account'),
+                title:  Text('Delete Account',style: Theme.of(context).textTheme.titleMedium),
                 leading: const Icon(Icons.delete_forever_rounded),
                 onPressed: (context) {
                   showDialog(
@@ -163,18 +163,18 @@ class SettingsPage extends StatelessWidget {
               sections: [
                 SettingsSection(
                   //margin: const EdgeInsetsDirectional.all(12.0),
-                  title: const Text('Account'),
+                  title:  Text('Account',style: Theme.of(context).textTheme.titleMedium),
                   tiles: mainSettingsTiles,
                 ),
                 SettingsSection(
-                  title: const Text('Help & Support'),
+                  title:  Text('Help & Support',style: Theme.of(context).textTheme.titleMedium),
                   tiles: [
                     SettingsTile.navigation(
                       onPressed: (context) => showDialog(
                           context: context,
                           builder: (context) =>
                               ReportBugDialog(currentUser: currentUser)),
-                      title: const Text('Report an Issue / Bug'),
+                      title:  Text('Report an Issue / Bug',style: Theme.of(context).textTheme.titleMedium),
                       leading: const Icon(Icons.report),
                     ),
                   ],

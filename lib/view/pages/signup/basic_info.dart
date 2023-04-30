@@ -35,11 +35,6 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
       builder: (context, state) {
         return Stack(
           children: [
-            Opacity(
-                opacity: 0.05,
-                child: Image.asset(
-                  'lib/assets/backgrounds/Categories_Screenshot.png',
-                )),
             Form(
                 key: formKey,
                 child: Center(
@@ -49,7 +44,7 @@ class _BasicInfoPageState extends State<BasicInfoPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 24.0),
                         child: Text(
-                          'First the basics.',
+                          'Get Started',
                           style: Theme.of(context).textTheme.headlineMedium,
                         ),
                       ),

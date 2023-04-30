@@ -20,10 +20,7 @@ class _WelcomePageState extends State<WelcomePage> {
       body: Stack(
         alignment: AlignmentDirectional.center,
         children: [
-          Opacity(
-              opacity: 0.05,
-              child: Image.asset(
-                  'lib/assets/backgrounds/Categories_Screenshot.png')),
+         
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +33,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       style: Theme.of(context).textTheme.displayMedium),
                 ),
                 const Text(
-                    'Learn the what\'s, why\'s, & how\'s of senior care.'),
+"Making life easier for our elderly residents!"),
                 Padding(
                   padding: const EdgeInsets.only(top: 18),
                   child: ElevatedButton(

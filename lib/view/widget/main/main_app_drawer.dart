@@ -32,9 +32,15 @@ class MainAppDrawer extends StatelessWidget {
                                 userColor: hexToColor(state.user.userColor!),
                                 memberName: state.user.name!),
                           ),
-                          Text(
-                            state.user.name!.split(' ')[0],
-                            style: Theme.of(context).textTheme.headlineMedium,
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                            child: Text(
+                              state.user.name!.split(' ')[0],
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20
+                              ),
+                            ),
                           ),
                         ],
                       )),

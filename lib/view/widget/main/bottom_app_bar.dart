@@ -90,9 +90,9 @@ class _BottomAppBarState extends State<MainBottomAppBar> {
                 items: const [
                   BottomNavigationBarItem(
                       label: 'Categories',
-                      icon: Icon(FontAwesomeIcons.layerGroup)),
+                      icon: Icon(FontAwesomeIcons.compass)),
                   BottomNavigationBarItem(
-                      label: 'Home', icon: Icon(Icons.home)),
+                      label: 'Home', icon: Icon(FontAwesomeIcons.plus)),
                   BottomNavigationBarItem(
                       label: 'Profile', icon: Icon(Icons.person)),
                 ]);

@@ -14,10 +14,7 @@ class UserTypePage extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        Opacity(
-            opacity: 0.05,
-            child: Image.asset(
-                'lib/assets/backgrounds/Categories_Screenshot.png')),
+       
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
